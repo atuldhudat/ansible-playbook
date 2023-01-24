@@ -1,0 +1,24 @@
+--- # multitask
+
+- hosts: devlinux
+  user: ansible
+  become: yes
+  connection: ssh
+  gather_facts: yes
+
+
+  tasks:
+   - name: install tree
+     action: yum pkg=tree state=present
+
+
+  tasks:
+   - name: install apache
+     action: yum pkg=httpd state=present
+
+   - name: start apache
+     action: service name=httpd state=started
+
+   - name: deploy index
+     action: copy src=index.html dest=/var/www/html/
+

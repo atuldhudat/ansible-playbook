@@ -1,0 +1,26 @@
+--- # multihost
+- hosts: devlinux[0]
+  user: ansible
+  become: yes
+  connection: yes
+  gather_facts: yes
+
+
+
+  tasks:
+    - name: install tree
+      action: yum pkg=tree state=present
+
+
+- hosts: devlinux[1]
+  user: ansible
+  become: yes
+  connection: ssh
+  gather_facts: yes
+
+
+  tasks:
+    - name: install git
+      action: yum pkg=git state=present
+
+
